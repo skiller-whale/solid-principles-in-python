@@ -55,8 +55,3 @@ class FxService:
         rate = get_conversion_rate(from_currency, to_currency, self.provider)
         converted_amount = amount * rate
         return round(converted_amount, 2)
-
-
-def format_quote(amount, from_currency, to_currency, converted_amount, fees):
-    return f"Your quote to convert {amount} {from_currency} into {to_currency}:" \
-           f"\n\t{converted_amount} {to_currency} (Fees: {fees} {to_currency})"

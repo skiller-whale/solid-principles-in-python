@@ -1,42 +1,30 @@
 """
-This module imports code from exercise_1, and adds a new FixedFeeCalculator.
+This exercise additionally imports a new FixedFeeCalculator, which sets a fee
+at a fixed amount in one currency. This needs to be converted into the target
+currency, so it can be subtracted. Because of this, the calculate method
+expects a currency argument.
 
-This calculator applies fee as a fixed amount in one currency. However, this
-needs to be converted into whatever currency is being provided. Because of this,
-the FixedFeeCalculator.calculate method expects a currency argument.
+The FixedFeeCalculator is incompatible with the CurrencyConverter's design.
+This means it cannot be substituted for the PercentageFeeCalculator (try running
+this script to see what happens)
 
-This means that the FixedFeeCalculator is incompatible with how the 
-CurrencyConverter is currently designed to calculate the fee for a 
-conversion, so cannot be substituted for the PercentageFeeCalculator 
-(try running this script to see what happens)
+1. Think about what what a generic interface between FeeCalculators and the
+   CurrencyConverter class should look like. At the very least, the interface
+   should provide enough data for both the PercentageFeeCalculator and
+   FixedFeeCalculator to work with the CurrencyConverter.
 
-1. Think about the 'interface' for a generic FeeCalculator that could work with
-   the CurrencyConverter class. This interface should allow both the
-   PercentageFeeCalculator and FixedFeeCalculator to work with the
-   CurrencyConverter.
+   This will probably require you to define a new class that represents the data
+   being transferred.
 
 2. Update the CurrencyConverter, PercentageFeeCalculator, and FixedFeeCalculator
-   classes so that they all expect / satisfy this interface. The
-   CurrencyConverter class should work the same way, whichever calculator is
-   passed in.
+   so that they all work with this interface. The CurrencyConverter class should
+   work the same way, whichever calculator is passed in.
 """
 
-
-from util import FxService
-from exercise_1 import CurrencyConverter, PercentageFeeCalculator
-
-
-class FixedFeeCalculator:
-    def __init__(self, fx_service, fee_amount=5, fee_currency="USD"):
-        self.fee_amount = fee_amount
-        self.fee_currency = fee_currency
-        self.fx_service = fx_service
-
-    def calculate(self, target_currency):
-        return self.fx_service.convert(
-            self.fee_currency,
-            target_currency, self.fee_amount
-         )
+from converter.currency_converter import CurrencyConverter
+from converter.percentage_fee_calculator import PercentageFeeCalculator
+from converter.fixed_fee_calculator import FixedFeeCalculator
+from converter.xchange import FxService
 
 
 if __name__ == '__main__':
@@ -50,14 +38,13 @@ if __name__ == '__main__':
 
     print("\nQuote from percentage fee converter:")
     print(quote)
-    print()
 
     # Use the fixed fee converter to generate a quote:
     fixed_fee_calculator = FixedFeeCalculator(fx_service, 3.50, "GBP")
     fixed_fee_converter = CurrencyConverter(fx_service, fixed_fee_calculator)
     quote = fixed_fee_converter.generate_quote("CAD", "RMB", 300)
 
-    print("Quote from fixed fee converter:")
+    print("\nQuote from fixed fee converter:")
     print(quote)
 
 

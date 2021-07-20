@@ -1,58 +1,48 @@
 """
-This module contains a CurrencyConverter class, which is used to generate
-quotes for a currency conversion business. This class uses:
+The converter.currency_converter module contains a CurrencyConverter class,
+which is used to generate quotes for a conversion business.
+
+This class uses:
+
 * An `FxService` object to convert money from one currency to another.
-* A `PercentageFeeCalculator` to calculate a fee to deduct.
+* A `PercentageFeeCalculator` which calculates a fee to deduct.
+  (in converter.percentage_fee_calculator).
 
 --------------------------------------------------------------------------------
 
-1. First, make the CurrencyConverter more flexible by allowing different
-   currencies to be passed to generate_quote as method parameters (e.g.
-   from_currency and to_currency)
+1. Update the CurrencyConverter class to make it more flexible by allowing
+   different currencies to be passed as arguments to generate_quote
+   (e.g. from_currency and to_currency)
 
-   Update the usage of CurrencyConverter at the bottom of the file as well.
+   Update the usage of CurrencyConverter in this exercise script so the output
+   remains the same.
 
-2. Instead of creating a new FxService in the constructor of
-   CurrencyConverter, pass in the fx_service object as an argument
-   (Dependency Injection).
+2. Inject an instance of the FxService as a dependency to CurrencyConverter
+   instead of creating it in the constructor. The new signature should be:
 
-   Update the usage of CurrencyConverter at the bottom of the file as well
+      def __init__(self, fx_service)
+
+   Update the usage of CurrencyConverter in this exercise script.
    (you'll need to create a new FxService instance and pass it as an argument)
 
-3. Decouple the CurrencyConverter and PercentageFeeCalculator. Afterwards, you
-   should be able to pass an instance of the PercentageFeeCalculator into the
-   CurrencyConverter __init__ method, and use this to calculate conversion fees.
+3. Decouple the CurrencyConverter and PercentageFeeCalculator, by injecting a
+   fee calculator instance to the constructor. The signature should now be:
+
+      def __init__(self, fx_service, fee_calculator):
+
+   Again, update this exercise script so it runs and produces the same output.
 """
 
-from util import FxService, format_quote
-
-
-class CurrencyConverter:
-    def __init__(self):
-        self.fx_service = FxService('www.fx.com')
-
-    def generate_quote(self, amount):
-        from_currency = "USD"
-        to_currency = "EUR"
-        converted_amount = self.fx_service.convert(from_currency, to_currency, amount)
-        fees = PercentageFeeCalculator(0.5).calculate(converted_amount)
-        return format_quote(amount, from_currency, to_currency, converted_amount, fees)
-
-
-class PercentageFeeCalculator:
-    def __init__(self, percentage_fee):
-        self.fee_ratio = percentage_fee / 100.
-
-    def calculate(self, amount):
-        return round(amount * self.fee_ratio, 2)
+from converter.currency_converter import CurrencyConverter
+from converter.percentage_fee_calculator import PercentageFeeCalculator
+from converter.xchange import FxService
 
 
 if __name__ == '__main__':
-
     # Use the converter to generate a quote:
     converter = CurrencyConverter()
     quote = converter.generate_quote(250)
-
+    print()
     print(quote)
 
 
