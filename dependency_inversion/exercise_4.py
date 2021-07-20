@@ -39,6 +39,6 @@ if __name__ == '__main__':
 
     calculator = PercentageFeeCalculator(1.2)
     currency_converter = CurrencyConverter(fx_service, calculator)
-    quote = currency_converter.generate_quote("GBP", "YEN", 30)
+    quote = currency_converter.generate_quote(30, "GBP", "YEN")
 
     print('\n', quote)

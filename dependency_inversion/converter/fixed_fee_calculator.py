@@ -7,5 +7,6 @@ class FixedFeeCalculator:
     def calculate(self, target_currency):
         return self.fx_service.convert(
             self.fee_currency,
-            target_currency, self.fee_amount
+            target_currency,
+            self.fee_amount
          )

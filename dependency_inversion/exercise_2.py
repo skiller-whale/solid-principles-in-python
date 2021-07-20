@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # Use the percentage fee converter to generate a quote:
     percentage_fee_calculator = PercentageFeeCalculator(0.5)
     percentage_fee_converter = CurrencyConverter(fx_service, percentage_fee_calculator)
-    quote = percentage_fee_converter.generate_quote("USD", "GBP", 500)
+    quote = percentage_fee_converter.generate_quote(500, "USD", "GBP")
 
     print("\nQuote from percentage fee converter:")
     print(quote)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     # Use the fixed fee converter to generate a quote:
     fixed_fee_calculator = FixedFeeCalculator(fx_service, 3.50, "GBP")
     fixed_fee_converter = CurrencyConverter(fx_service, fixed_fee_calculator)
-    quote = fixed_fee_converter.generate_quote("CAD", "RMB", 300)
+    quote = fixed_fee_converter.generate_quote(300, "CAD", "RMB")
 
     print("\nQuote from fixed fee converter:")
     print(quote)
