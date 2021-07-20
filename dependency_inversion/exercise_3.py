@@ -33,7 +33,7 @@ if __name__ == '__main__':
     calculator = ComplexFeeCalculator(fx_service, 3.50, "GBP")
 
     currency_converter = CurrencyConverter(fx_service, calculator)
-    quote = currency_converter.generate_quote("CAD", "EUR", 800)
+    quote = currency_converter.generate_quote(800, "CAD", "EUR")
 
     print("\nQuote from more complex converter")
     print(quote)
