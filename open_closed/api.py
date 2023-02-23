@@ -12,7 +12,7 @@ def take_payment(card_type, number, amount):
     print(f"Taking {card_type} payment from <{display_number}>", end='')
     for _ in range(4):
         print('.', end='', flush=True)
-        time.sleep(0.4)
+        time.sleep(0.2)
     print(' complete.')
 
 
