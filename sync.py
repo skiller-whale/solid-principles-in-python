@@ -10,6 +10,7 @@ from urllib.parse import urljoin
 WATCHED_EXTS = [".py", ".ipynb"]
 # site-packages is found in a Python environment (which includes LOTS of .py files)
 IGNORE_DIRS = [".git", ".ipynb_checkpoints", "site-packages", "bin"]
+ATTENDANCE_ID_ENVIRON_VAR_NAME = 'SW_ATTENDANCE_ID'
 
 
 ASCII_ART = """
@@ -169,11 +170,15 @@ class Watcher:
 
 def skiller_whale_sync():
     print(ASCII_ART)
-    attendance_id = input("Please copy and paste your ID from the course "
-                          "page here and press enter.\n")
+
+    try:
+        attendance_id = os.environ[ATTENDANCE_ID_ENVIRON_VAR_NAME]
+    except KeyError:
+        attendance_id = input("Please copy and paste your ID from the course "
+                            "page here and press enter.\n")
     print("")
     print("Great! We're going to start watching this directory for changes "
-          "so that the trainer can see your progress.")
+          "so that the coach can see your progress.")
     print("Hit Ctrl+C to stop.")
 
     updater = Updater(attendance_id=attendance_id)
