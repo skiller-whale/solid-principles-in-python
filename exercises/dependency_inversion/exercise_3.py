@@ -9,8 +9,6 @@ fee calculators, and doesn't match the interface needed by the CurrencyConverter
 2. Update the ComplexFeeCalculator so that it satisfies the interface expected
    by the CurrencyConverter. Don't make any changes to the CurrencyConverter.
 
-   (See the bottom of this file for additional hints)
-
 3. Update this exercise script to create an instance of the ComplexFeeCalculator
    class, and use this with the CurrencyConverter to charge a fee of:
 

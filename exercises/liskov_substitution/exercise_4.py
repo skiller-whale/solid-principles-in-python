@@ -11,7 +11,7 @@ class AllDayEvent(Event):
         self.end = datetime(date.year, date.month, date.day, 23, 59)
         self.attendees = ["Me"] + list(attendees)
 
-    def move(self, timedelta):
+    def move(self, delta):
         pass  # AllDayEvents should always go from the start to end of a day
 
 
