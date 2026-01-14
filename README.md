@@ -1,6 +1,6 @@
-# Skiller Whale, Exercises for Advanced Core Python
+# Skiller Whale - SOLID Principles in Python
 
-This repo includes exercises to accompany Skiller Whale sessions on the advanced core features of Python 3.
+This repo includes exercises to accompany Skiller Whale sessions on SOLID principles in Python.
 
 During each session you'll be asked to write and edit code in some of the files.
 
@@ -26,7 +26,7 @@ During each session you'll be asked to write and edit code in some of the files.
 
 5. To check this is all set up, run `python3 sync.py` and enter your attendance ID when prompted. You shouldn't see any errors.
 
-6. At the end of the session termimnate the sync script with `Ctrl + C`.
+6. At the end of the session terminate the sync script with `Ctrl + C`.
 
 ## Using `docker`
 
