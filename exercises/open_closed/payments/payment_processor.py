@@ -12,10 +12,8 @@ class PaymentProcessor:
 
         if self.card.card_type == "mastercarp":
             mastercarp_payment(self.card, self.amount)
-
         elif self.card.card_type == "anchovisa":
             anchovisa_payment(self.card, self.amount)
-
         else:
             raise ValueError("Unknown Card Type")
 
